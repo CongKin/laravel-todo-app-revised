@@ -13,7 +13,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::query()
-        ->where('user_session', 1/*request()->user()->id*/)
+        ->where('user_session', session()->getId() /*request()->user()->id*/)
         ->orderBy("created_at","desc")
         ->paginate();
 
@@ -41,7 +41,7 @@ class TaskController extends Controller
             'deadline' => ['nullable', 'date'],
         ]);
 
-        $data['user_session'] = 1; //$request->user()->id;
+        $data['user_session'] = session()->getId(); //$request->user()->id;
         $task = Task::create($data);
 
         return to_route('task.index')->with('message', 'Task was created');
