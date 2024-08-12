@@ -115,4 +115,12 @@ class TaskController extends Controller
 
         return to_route('task.index')->with('message', 'Task was deleted');
     }
+
+    // reset the session after a period of inactive (reset todo list)
+    public function regenerate(){
+        
+        session()->regenerate();
+
+        return to_route('task.index');
+    }
 }

@@ -10,3 +10,4 @@ use App\Http\Controllers\TaskController;
 Route::resource('task', TaskController::class);    
 // route for update status
 Route::put('/task/{task}/update_status', [TaskController::class,'update_status'])->name('task.update_status');
+Route::get('/regenerate', [TaskController::class,'regenerate'])->name('task.regenerate');
