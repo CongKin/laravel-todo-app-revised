@@ -121,6 +121,6 @@ class TaskController extends Controller
         
         session()->regenerate();
 
-        return to_route('task.index');
+        return to_route('task.index')->with('message', 'Todo-list reset');
     }
 }
