@@ -12,7 +12,7 @@
                     <button type="submit" name="status" value="3" class="button-61">Complete Task</button>
                     <button type="submit" name="status" value="1" class="button-61">Set to Pending</button>
                 @elseif($task->status == '3')
-                    <button type="submit" name="status" value="2" class="button-61">Reopen Task</button>
+                    <button type="submit" name="status" value="1" class="button-61">Reopen Task</button>
                 @endif
             </form>
             <a href="{{ route('task.edit', $task) }}" class="button-2">Edit</a>

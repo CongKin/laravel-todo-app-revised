@@ -49,7 +49,7 @@
                                     <button type="submit" name="status" value="3" class="button-61">Complete</button>
                                     <button type="submit" name="status" value="1" class="button-61">Pending</button>
                                 @elseif($task->status == '3')
-                                    <button type="submit" name="status" value="2" class="button-61">Reset</button>
+                                    <button type="submit" name="status" value="1" class="button-61">Reset</button>
                                 @endif
                             </form>
                         </td>

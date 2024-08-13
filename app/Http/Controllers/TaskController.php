@@ -12,6 +12,19 @@ class TaskController extends Controller
      */
     public function index()
     {
+        if(is_null(session('lastActivityTime'))){
+            session()->regenerate();
+            session(['lastActivityTime' => now()]);
+            return to_route('task.index')->with('message', 'Session expired, Todo-list reset');
+        }else if (now()->diffInMinutes(session('lastActivityTime')) >= (config('session.lifetime')) ) {
+            abort(419);
+        }
+
+        // return session('lastActivityTime')->diffInMinutes(now());
+        // return session()->all();
+
+        session(['lastActivityTime' => now()]);
+
         $tasks = Task::query()
         ->where('user_session', session()->getId() /*request()->user()->id*/)
         ->orderBy("created_at","desc")
@@ -25,6 +38,16 @@ class TaskController extends Controller
      */
     public function create()
     {
+        if(is_null(session('lastActivityTime'))){
+            session()->regenerate();
+            session(['lastActivityTime' => now()]);
+            return to_route('task.index')->with('message', 'Session expired, Todo-list reset');
+        }else if (now()->diffInMinutes(session('lastActivityTime')) >= (config('session.lifetime')) ) {
+            abort(419);
+        }
+
+        session(['lastActivityTime' => now()]);
+
         return view("task.create");
     }
 
@@ -33,6 +56,8 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        session(['lastActivityTime' => now()]);
+
         $data = $request->validate([
             'task' => ['required', 'string', 'max:255'],
             'description'=> ['nullable', 'string'],
@@ -52,9 +77,15 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        // if ($task->user_id !== request()->user()->id) {
-        //     abort(403);
-        // }
+        if(is_null(session('lastActivityTime'))){
+            session()->regenerate();
+            session(['lastActivityTime' => now()]);
+            return to_route('task.index')->with('message', 'Session expired, Todo-list reset');
+        }else if (now()->diffInMinutes(session('lastActivityTime')) >= (config('session.lifetime')) ) {
+            abort(419);
+        }
+
+        session(['lastActivityTime' => now()]);
 
         return view("task.show", ["task"=> $task]);
     }
@@ -64,9 +95,15 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        // if ($task->user_id !== request()->user()->id) {
-        //     abort(403);
-        // }
+        if(is_null(session('lastActivityTime'))){
+            session()->regenerate();
+            session(['lastActivityTime' => now()]);
+            return to_route('task.index')->with('message', 'Session expired, Todo-list reset');
+        }else if (now()->diffInMinutes(session('lastActivityTime')) >= (config('session.lifetime')) ) {
+            abort(419);
+        }
+
+        session(['lastActivityTime' => now()]);
 
         return view("task.edit", ["task"=> $task]);
     }
@@ -76,9 +113,7 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        // if ($task->user_id !== request()->user()->id) {
-        //     abort(403);
-        // }
+        session(['lastActivityTime' => now()]);
 
         $data = $request->validate([
             'task' => ['required', 'string', 'max:255'],
@@ -96,6 +131,8 @@ class TaskController extends Controller
     // update the status of the to do taskw
     public function update_status(Request $request, Task $task)
     {
+        session(['lastActivityTime' => now()]);
+
         $data = $request->validate([
             'status' => ['required', 'in:1,2,3'],
         ]);
@@ -111,6 +148,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
+        session(['lastActivityTime' => now()]);
+
         $task->delete();
 
         return to_route('task.index')->with('message', 'Task was deleted');
@@ -120,7 +159,8 @@ class TaskController extends Controller
     public function regenerate(){
         
         session()->regenerate();
+        session(['lastActivityTime' => now()]);
 
-        return to_route('task.index')->with('message', 'Todo-list reset');
+        return to_route('task.index')->with('message', 'Session expired, Todo-list reset');
     }
 }
