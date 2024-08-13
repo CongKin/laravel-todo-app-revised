@@ -1,19 +1,29 @@
 Author: Ong Cong Kin<br>
-APP: Todo-list APP<br>
+APP: Todo-list APP (Revised)<br>
 
 TO start the app, download the folder, and follow the step:
-1. Open using terminal/command prompt, and then run the command:<br>
-    a. cd (the dowloaded folder path)<br>
-    b. php artisan serve
-2. Open using Visual Studio Code
-    a. open the folder<br>
-    b. create a new terminal<br>
-    c. run the command: php artisan serve
+1. Open the folder
+2. find .env.example and rename it to: .env
+3. Open the command prompt:
+4. move to the dowloaded folder path: <br>
+    command: cd (folder path)
+5. update the composer: <br>
+    command:<br>
+    a. composer install<br>
+    b. composer update
+7. Generate App key:<cd>
+    command: php artisan key:generate
+8. Generate the sqlite database:
+    command: php artisan migrate
+9. build css file using node.js
+    command: <br>
+    a. npm install<br>
+    b. npm run build 
+10. run the server:<br>
+    command: php artisan serve
+
 
 Then, visit http://127.0.0.1:8000 at your browser
-
-Testing Account: test@example.com<br>
-Password: qwer@123
 
 Function:
 1. Create new task
