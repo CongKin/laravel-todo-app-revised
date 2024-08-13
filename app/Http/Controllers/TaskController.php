@@ -15,7 +15,7 @@ class TaskController extends Controller
         if(is_null(session('lastActivityTime'))){
             session()->regenerate();
             session(['lastActivityTime' => now()]);
-            return to_route('task.index')->with('message', 'Session expired, Todo-list reset');
+            return to_route('task.index');
         }else if (now()->diffInMinutes(session('lastActivityTime')) >= (config('session.lifetime')) ) {
             abort(419);
         }
@@ -41,7 +41,7 @@ class TaskController extends Controller
         if(is_null(session('lastActivityTime'))){
             session()->regenerate();
             session(['lastActivityTime' => now()]);
-            return to_route('task.index')->with('message', 'Session expired, Todo-list reset');
+            return to_route('task.index');
         }else if (now()->diffInMinutes(session('lastActivityTime')) >= (config('session.lifetime')) ) {
             abort(419);
         }
@@ -80,7 +80,7 @@ class TaskController extends Controller
         if(is_null(session('lastActivityTime'))){
             session()->regenerate();
             session(['lastActivityTime' => now()]);
-            return to_route('task.index')->with('message', 'Session expired, Todo-list reset');
+            return to_route('task.index');
         }else if (now()->diffInMinutes(session('lastActivityTime')) >= (config('session.lifetime')) ) {
             abort(419);
         }
@@ -98,7 +98,7 @@ class TaskController extends Controller
         if(is_null(session('lastActivityTime'))){
             session()->regenerate();
             session(['lastActivityTime' => now()]);
-            return to_route('task.index')->with('message', 'Session expired, Todo-list reset');
+            return to_route('task.index');
         }else if (now()->diffInMinutes(session('lastActivityTime')) >= (config('session.lifetime')) ) {
             abort(419);
         }
